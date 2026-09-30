@@ -1,0 +1,36 @@
+{
+  "name": "sokil-gcs",
+  "version": "1.0.0",
+  "description": "",
+   "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:backend": "turbo dev --filter=@sokil/backend",
+    "dev:frontend": "turbo dev --filter=@sokil/gcs-frontend",
+    "build": "turbo build",
+    "build:backend": "turbo build --filter=@sokil/backend",
+    "build:frontend": "turbo build --filter=@sokil/gcs-frontend",
+    "lint": "turbo lint",
+    "check-types": "turbo check-types",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.4.2",
+      "onFail": "download"
+    }
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0"
+  },
+  "packageManager": "pnpm@12.4.2"
+}

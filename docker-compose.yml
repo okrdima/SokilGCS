@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # 🔴 In-Memory Storage for Telemetry & Satellites Buffer
+  redis:
+    image: redis:7-alpine
+    container_name: sokil-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ⚙️ NestJS C2 Telemetry Server
+  backend:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    container_name: sokil-backend
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # 💻 Next.js Tactical 3D Map Interface
+  gcs-frontend:
+    build:
+      context: .
+      dockerfile: apps/gcs-frontend/Dockerfile
+    container_name: sokil-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_WS_URL=ws://localhost:3001
+    depends_on:
+      - backend

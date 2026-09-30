@@ -1,0 +1,18 @@
+{
+  "name": "@sokil/config",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "files": [
+    "tsconfig",
+    "prettier",
+    "eslint"
+  ],
+  "exports": {
+    "./tsconfig/node.json": "./tsconfig/node.json",
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/react.json": "./tsconfig/react.json",
+    "./prettier": "./prettier/index.json",
+    "./eslint/base.js": "./eslint/base.js"
+    }
+}

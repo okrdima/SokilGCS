@@ -1,0 +1,29 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+      "ollama": {
+        "name": "Ollama",
+        "npm": "@ai-sdk/openai-compatible",
+        "options": {
+          "baseURL": "http://127.0.0.1:11434/v1"
+        },
+        "models": {
+          "gpt-oss:20b": {
+            "name": "GPT-OSS 20B (Primary Orchestrator)",
+            "tool_call": true
+          },
+          "gemma4:12b-mlx": {
+            "name": "Gemma 4 12B (Sub-Agent Spec Writer)",
+            "tool_call": true
+          },
+          "gemma4:e4b-mlx": {
+            "name": "Gemma 4 e4B (Sub-Agent Fast Developer)",
+            "tool_call": true
+          },
+          "qwen3.8:27b-mlx": {
+            "name": "Qwen 3.8 27B (Heavy Architect)"
+          }
+        }
+      }
+  }
+}

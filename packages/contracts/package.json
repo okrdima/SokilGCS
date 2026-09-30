@@ -1,0 +1,22 @@
+{
+  "name": "@sokil/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "check-exports": "ts-node scripts/check-exports.ts",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@sokil/config": "workspace:*",
+    "turbo": "^2.11.2",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.1",
+    "@types/node": "^20.19.43"
+  },
+  "packageManager": "pnpm@12.4.2"
+}
