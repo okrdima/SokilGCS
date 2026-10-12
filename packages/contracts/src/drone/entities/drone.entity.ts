@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BaseEntitySchema } from '../../shared';
+import { BaseEntitySchema } from '@/shared';
 import { DroneStateSchema, FlightModeSchema } from '../types';
 
 export const DroneEntitySchema = BaseEntitySchema.extend({
