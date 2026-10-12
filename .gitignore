@@ -34,6 +34,7 @@ dist-ssr
 dist/
 build/
 .next/*
+tsconfig.tsbuildinfo
 
 
 # Test coverage reports (local dev artifact — T-03-06-03)
