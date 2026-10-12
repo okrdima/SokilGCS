@@ -1,10 +1,13 @@
-export interface CreateDroneDTO {
-  /**
-   * Unique identifier for the drone.
-   */
-  id: string;
-  /**
-   * Human readable name.
-   */
-  name: string;
-}
+import type { z } from 'zod';
+import { DroneEntitySchema } from '../entities';
+
+export const CreateDroneSchema = DroneEntitySchema.omit({
+  _id: true,
+  _createdAt: true,
+  _updatedAt: true,
+  _createdBy: true,
+  _updatedBy: true,
+});
+
+
+export type CreateDrone = z.infer<typeof CreateDroneSchema>;

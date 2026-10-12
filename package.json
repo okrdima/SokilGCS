@@ -2,8 +2,7 @@
   "name": "sokil-gcs",
   "version": "1.0.0",
   "description": "",
-   "private": true,
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "dev": "turbo dev",
     "dev:backend": "turbo dev --filter=@sokil/backend",
@@ -11,6 +10,8 @@
     "build": "turbo build",
     "build:backend": "turbo build --filter=@sokil/backend",
     "build:frontend": "turbo build --filter=@sokil/gcs-frontend",
+    "build:contracts": "turbo run lint check-types build --filter=@sokil/contracts",
+    "nest": "pnpm --filter @sokil/backend exec nest",
     "lint": "turbo lint",
     "check-types": "turbo check-types",
     "format": "prettier --write .",
@@ -29,8 +30,8 @@
     }
   },
   "devDependencies": {
+    "prettier": "^3.9.10",
     "turbo": "^2.0.0",
     "typescript": "^5.4.0"
-  },
-  "packageManager": "pnpm@12.4.2"
+  }
 }

@@ -7,3 +7,6 @@ allowBuilds:
   '@nestjs/core': true
   '@parcel/watcher': true
   unrs-resolver: true
+
+overrides:
+  zod: '^4.6.5'

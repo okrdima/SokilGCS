@@ -1,41 +1,58 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import { importX } from 'eslint-plugin-import-x';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 
 export const baseEslintConfig = tseslint.config(
   {
-    ignores: ['dist', 'node_modules', '.next', '.turbo', 'coverage'],
+    ignores: ['**/dist', '**/node_modules', '**/.next', '**/.turbo', '**/coverage'],
   },
   {
+    linterOptions: { reportUnusedDisableDirectives: 'error' },
+  },
+  {
+    files: ['**/*.{ts,tsx,js,mjs}'],
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
+      importX.flatConfigs.recommended,
+      importX.flatConfigs.typescript,
     ],
-    files: ['**/*.{ts,tsx,js,mjs}'],
+    settings: {
+      'import-x/resolver-next': [createTypeScriptImportResolver()],
+    },
     rules: {
-      // 🔒 Бекапека: Заборона Math.random() (вимагаємо crypto.getRandomValues)
       'no-restricted-syntax': [
         'error',
         {
           selector: "MemberExpression[object.name='Math'][property.name='random']",
-          message: 'Використовуй crypto.getRandomValues() замість Math.random() для безпечних балістичних/криптографічних обчислень.',
+          message: 'Use crypto.getRandomValues() instead of Math.random().',
         },
       ],
-
-      // TS 6 / verbatimModuleSyntax сумісність
+      'no-console': 'warn',
+      'import-x/no-cycle': 'error',
+      'import-x/no-self-import': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', ignoreRestSiblings: true },
+      ],
+      // TypeScript already covers these, and they crash or slow down on circular barrels
+      'import-x/export': 'off',
+      'import-x/named': 'off',
+      'import-x/namespace': 'off',
+      'import-x/default': 'off',
+      'import-x/no-named-as-default': 'off',
+      'import-x/no-named-as-default-member': 'off',
+    },
+  },
+  {
+    files: ['**/*.{ts,tsx,mts,cts}'],
+    rules: {
       '@typescript-eslint/consistent-type-imports': [
         'error',
         { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
       ],
-
-      // Ігнорування змінних із префіксом `_`
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
-        },
-      ],
+      '@typescript-eslint/no-import-type-side-effects': 'error',
     },
-  }
+  },
 );

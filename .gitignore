@@ -30,9 +30,11 @@ node_modules
 dist
 dist-ssr
 *.local
-.turbo/
+.turbo/*
 dist/
 build/
+.next/*
+
 
 # Test coverage reports (local dev artifact — T-03-06-03)
 coverage/

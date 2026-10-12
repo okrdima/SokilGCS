@@ -15,7 +15,11 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2022"
+    "target": "ES2022",
+    "paths": {
+          "@sokil/contracts": ["../../packages/contracts/src/index.ts"],
+          "@sokil/contracts/*": ["../../packages/contracts/src/*"]
+    }
   },
   "exclude": ["node_modules", "dist", ".next"]
 }

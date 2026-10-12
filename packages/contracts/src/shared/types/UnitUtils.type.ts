@@ -1,15 +1,9 @@
-export type Unit =
-  | 'm'
-  | 'm/s'
-  | 'deg'
-  | 'rad'
-  | 'W'
-  | 'A'
-  | 'V';
+import { z } from 'zod';
 
-export interface UnitUtils {
-  /**
-   * Simple utility to format a value with its unit.
-   */
-  format(value: number, unit: Unit): string;
-}
+/**
+ * Placeholder for unit conversion utilities.
+ * The schema is intentionally empty; concrete units are defined in domain modules.
+ */
+export const UnitUtilsSchema = z.object({});
+
+export type UnitUtils = z.infer<typeof UnitUtilsSchema>;

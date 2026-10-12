@@ -8,15 +8,30 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "check-exports": "ts-node scripts/check-exports.ts",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src"
   },
-  "dependencies": {},
+  "dependencies": {
+    "zod": "^4.6.5"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*/index.d.ts",
+      "default": "./dist/*/index.js"
+    }
+  },
   "devDependencies": {
     "@sokil/config": "workspace:*",
+    "@types/node": "^20.19.43",
+    "eslint": "^9.39.5",
+    "ts-node": "^10.9.1",
     "turbo": "^2.11.2",
     "typescript": "^5.4.0",
-    "ts-node": "^10.9.1",
-    "@types/node": "^20.19.43"
+    "typescript-eslint": "^8.71.1"
   },
   "packageManager": "pnpm@12.4.2"
 }

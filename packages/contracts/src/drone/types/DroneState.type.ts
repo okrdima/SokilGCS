@@ -1,13 +1,11 @@
-export enum DroneMode {
-  ARMED = 'ARMED',
-  DISARMED = 'DISARMED',
-  GUIDED = 'GUIDED',
-  AUTO = 'AUTO',
-  RTL = 'RTL',
-}
+import { z } from 'zod';
+import { DroneCommandSchema } from './DroneCommand.type';
+import { FlightModeSchema } from './FlightMode.type';
 
-export interface DroneState {
-  mode: DroneMode;
-  armed: boolean;
-  batteryLevel?: number; // percentage
-}
+export const DroneStateSchema = z.object({
+  droneId: z.string(),
+  mode: FlightModeSchema,
+  heartbeat: z.number().int().positive(),
+  lastCommand: DroneCommandSchema.optional(),
+});
+export type DroneState = z.infer<typeof DroneStateSchema>;
