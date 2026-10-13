@@ -16,8 +16,10 @@
     "check-types": "turbo check-types",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:up": "docker compose up -d",
-    "db:down": "docker compose down"
+    "db:up": "docker compose --env-file .env.dev up -d",
+    "db:down": "docker compose --profile app --env-file .env.dev down",
+    "stack:up": "docker compose --profile app --env-file .env.dev up -d",
+    "stack:down": "docker compose --profile app --env-file .env.dev down"
   },
   "keywords": [],
   "author": "",

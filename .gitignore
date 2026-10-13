@@ -1,6 +1,5 @@
 # Planning artifacts (local-only per project config)
 .planning/
-/docs
 /uploads
 
 # OS
@@ -30,23 +29,15 @@ node_modules
 dist
 dist-ssr
 *.local
-.turbo/*
-dist/
-build/
-.next/*
+.turbo*
+dist
+build
+.next*
 tsconfig.tsbuildinfo
 
 
-# Test coverage reports (local dev artifact — T-03-06-03)
-coverage/
-
-# Phase 1 additions
 .env
+.env.dev
 .env.local
 .env.*.local
 .env.test
-
-# Self-host typography (B-01 2026-05-18) — source TTFs are too large + license-clean as upstream
-# WOFF2 derivatives in public/fonts/ ARE committed.
-scripts/fonts-src/*.ttf
-scripts/fonts-src/*.otf

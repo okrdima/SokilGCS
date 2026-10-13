@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { GeoPointSchema } from '../../shared/types';
+import { GeoPointSchema } from '@/shared/types';
 
 export const PositionSchema = z.object({
   point: GeoPointSchema,

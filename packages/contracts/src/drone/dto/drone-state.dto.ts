@@ -1,5 +1,5 @@
-import type { DroneState } from '../types/DroneState.type';
-import { DroneStateSchema } from '../types/DroneState.type'
+import type { DroneState } from '../types/drone-state.type';
+import { DroneStateSchema } from '../types/drone-state.type';
 
 /**
  * @module DroneStateAdapter
@@ -24,7 +24,7 @@ export function validateDroneState(rawState: unknown): DroneState {
  * @param state The canonical DroneState object.
  * @returns A simplified object suitable for transport.
  */
-export function toWireFormat(state: DroneState): { id: string, mode: string, heart: number } {
+export function toWireFormat(state: DroneState): { id: string; mode: string; heart: number } {
   // This is a deliberately thin adapter, focusing only on transport requirements
   return {
     id: state.droneId,

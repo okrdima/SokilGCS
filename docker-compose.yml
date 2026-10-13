@@ -1,20 +1,50 @@
-version: '3.8'
-
 services:
-  # 🔴 In-Memory Storage for Telemetry & Satellites Buffer
+  # In-memory store for the latest telemetry values (keep it only if you use it)
   redis:
     image: redis:7-alpine
     container_name: sokil-redis
+    restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 3s
       retries: 5
 
-  # ⚙️ NestJS C2 Telemetry Server
+  # PostgreSQL: sessions and recorded telemetry
+  db:
+    image: postgres:17
+    container_name: sokil-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sokil}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sokil_dev_only}
+      POSTGRES_DB: ${POSTGRES_DB:-sokilgcs}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sokil} -d ${POSTGRES_DB:-sokilgcs}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Web UI for browsing tables and running SQL: http://localhost:8080
+  adminer:
+    image: adminer
+    container_name: sokil-adminer
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # NestJS telemetry server (full-stack mode only: --profile app)
   backend:
+    profiles: ["app"]
     build:
       context: .
       dockerfile: apps/backend/Dockerfile
@@ -25,19 +55,27 @@ services:
       - NODE_ENV=production
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-sokil}:${POSTGRES_PASSWORD:-sokil_dev_only}@db:5432/${POSTGRES_DB:-sokilgcs}
     depends_on:
       redis:
         condition: service_healthy
+      db:
+        condition: service_healthy
 
-  # 💻 Next.js Tactical 3D Map Interface
+  # Next.js web interface (full-stack mode only: --profile app)
   gcs-frontend:
+    profiles: ["app"]
     build:
       context: .
       dockerfile: apps/gcs-frontend/Dockerfile
+      args:
+        # NEXT_PUBLIC_* values are baked into the browser bundle at build time
+        NEXT_PUBLIC_WS_URL: ws://localhost:3001
     container_name: sokil-frontend
     ports:
       - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_WS_URL=ws://localhost:3001
     depends_on:
       - backend
+
+volumes:
+  pgdata:
