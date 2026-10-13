@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { BaseEntitySchema } from '@/shared';
-import { DroneStateSchema, FlightModeSchema } from '../types';
+// import { DroneStateSchema, FlightModeSchema } from '@/drone/types';
 
 export const DroneEntitySchema = BaseEntitySchema.extend({
   name: z.string().min(2).max(50),
@@ -8,8 +8,8 @@ export const DroneEntitySchema = BaseEntitySchema.extend({
   serialNumber: z.string(),
   hardwareVersion: z.string(),
   firmwareVersion: z.string(),
-  status: DroneStateSchema,
-  currentMode: FlightModeSchema,
+  // status: DroneStateSchema.optional(),
+  // currentMode: FlightModeSchema,
 });
 
 export type DroneEntity = z.infer<typeof DroneEntitySchema>;

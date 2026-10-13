@@ -19,16 +19,16 @@ export class DroneController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.droneService.findOne(+id);
+    return this.droneService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDroneDto: UpdateDroneDto) {
-    return this.droneService.update(+id, updateDroneDto);
+    return this.droneService.update(id, updateDroneDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.droneService.remove(+id);
+    return this.droneService.remove(id);
   }
 }

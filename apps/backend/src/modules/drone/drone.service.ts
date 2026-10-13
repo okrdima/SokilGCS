@@ -1,26 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDroneDto } from './dto/create-drone.dto';
 import { UpdateDroneDto } from './dto/update-drone.dto';
+import { DroneRepository, DroneEntity } from '@sokil/contracts';
 
 @Injectable()
 export class DroneService {
-  create(_createDroneDto: CreateDroneDto) {
-    return 'This action adds a new drone';
+  constructor(private readonly droneRepository: DroneRepository) {}
+
+  async create(createDroneDto: CreateDroneDto): Promise<DroneEntity> {
+    return this.droneRepository.create(createDroneDto);
   }
 
-  findAll() {
-    return `This action returns all drone`;
+  async findAll(): Promise<DroneEntity[]> {
+    return this.droneRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} drone`;
+  async findOne(id: string): Promise<DroneEntity | null> {
+    return this.droneRepository.findOne(id);
   }
 
-  update(id: number, _updateDroneDto: UpdateDroneDto) {
-    return `This action updates a #${id} drone`;
+  async update(id: string, updateDroneDto: UpdateDroneDto): Promise<DroneEntity> {
+    return this.droneRepository.update(id, updateDroneDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} drone`;
+  async remove(id: string): Promise<void> {
+    return this.droneRepository.delete(id);
   }
 }
