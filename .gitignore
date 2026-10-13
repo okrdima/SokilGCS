@@ -29,10 +29,10 @@ node_modules
 dist
 dist-ssr
 *.local
-.turbo*
+.turbo
 dist
 build
-.next*
+.next
 tsconfig.tsbuildinfo
 
 

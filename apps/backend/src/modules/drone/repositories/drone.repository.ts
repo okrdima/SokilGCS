@@ -1,4 +1,4 @@
-import type { DroneEntity } from '../entities/drone.entity';
+import type { DroneEntity } from '@sokil/contracts';
 
 export abstract class DroneRepository {
   abstract findAll(): Promise<DroneEntity[]>;

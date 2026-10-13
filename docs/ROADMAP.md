@@ -4,12 +4,12 @@ Plan for v0.1.0, assuming roughly 10 to 15 hours per week. Each week ends with s
 
 ## Week 1: Foundations and contracts
 
-- [ ] Add the generic telemetry, alarm and command schemas to `@sokil/contracts`
+- [x] Add the generic telemetry, alarm and command schemas to `@sokil/contracts`
 - [ ] Add a test runner to contracts and write schema tests (valid and invalid examples)
 - [ ] Backend: add a Jest config and a `test` script; change `@nestjs/testing` to `^10.3.0`
 - [ ] Add a GitHub Actions workflow: install with `--frozen-lockfile`, then `turbo run lint check-types build test`
-- [ ] Clean `.gitignore` (use `.turbo` and `.next` without a slash so they match in every folder) and check that no build output is tracked
-- [ ] Replace the README
+- [x] Clean `.gitignore` (use `.turbo` and `.next` without a slash so they match in every folder) and check that no build output is tracked
+- [x] Replace the README
 
 **Done when:** CI is green and the schema tests pass.
 

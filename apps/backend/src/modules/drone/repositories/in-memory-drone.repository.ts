@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto';
-import { DroneEntity, DroneRepository } from '@sokil/contracts';
+import { DroneEntity } from '@sokil/contracts';
+import { DroneRepository } from './drone.repository';
 
 export class InMemoryDroneRepository implements DroneRepository {
   private drones: DroneEntity[] = [];
@@ -22,7 +23,6 @@ export class InMemoryDroneRepository implements DroneRepository {
     } as DroneEntity;
     this.drones.push(newDrone);
 
-    console.log(this.drones);
     return newDrone;
   }
 
