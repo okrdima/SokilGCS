@@ -6,7 +6,14 @@ import { TimestampMsSchema } from '@/shared';
 export const SampleQualitySchema = z.enum(['GOOD', 'STALE', 'INVALID']);
 export type SampleQuality = z.infer<typeof SampleQualitySchema>;
 
-export const TelemetryValueSchema = z.union([z.number(), z.boolean(), z.string().max(200)]);
+const primitiveSchema = z.union([z.number(), z.boolean(), z.string().max(200)]);
+
+// 2. Combine them into your final union schema
+export const TelemetryValueSchema = z.union([
+  primitiveSchema,
+  z.record(z.string(), primitiveSchema),
+]);
+
 export type TelemetryValue = z.infer<typeof TelemetryValueSchema>;
 
 /** One measurement of one channel at one moment. */

@@ -9,7 +9,7 @@
     "dev": "tsc-watch --noClear --onSuccess \"tsc-alias\"",
     "lint": "eslint src",
     "check-types": "tsc --noEmit",
-    "check-exports": "ts-node scripts/check-exports.ts"
+    "test": "vitest"
   },
   "dependencies": {
     "zod": "4.6.5"
@@ -33,7 +33,9 @@
     "tsc-watch": "^7.2.1",
     "turbo": "^2.11.2",
     "typescript": "^5.4.0",
-    "typescript-eslint": "^8.71.1"
+    "typescript-eslint": "^8.71.1",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^5.0.4"
   },
   "packageManager": "pnpm@12.4.2"
 }
