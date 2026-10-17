@@ -121,6 +121,26 @@ pnpm dev
 | `pnpm check-types`              | TypeScript type check across the workspace        |
 | `pnpm format` / `format:check`  | Prettier write / check                            |
 | `pnpm db:up` / `pnpm db:down`   | Start / stop local services (Docker Compose)      |
+| `pnpm --filter @sokil/backend ws:listen` | Stream live WebSocket telemetry to terminal |
+
+### Telemetry Simulator & Environment Variables
+
+The backend includes an in-memory rover telemetry simulator emitting multi-rate telemetry frames at 10 Hz over Socket.IO and accepting external telemetry batches via HTTP POST (`/ingest/batch`).
+
+Configured via environment variables (`.env`):
+- `PORT` — backend HTTP/WS port (default `3001` in local dev, `3000` in container)
+- `WEB_ORIGIN` — CORS allowed origin (default `http://localhost:3000`)
+- `SIMULATOR_ENABLED` — starts the 10 Hz circular vehicle simulation (`true` / `false`)
+- `SIMULATOR_SEED` — PRNG seed for reproducible noise (default `42`)
+- `SIMULATOR_BATTERY_DRAIN_SECONDS` — duration of linear battery drain (default `600`)
+- `INGEST_TOKEN` — secret key required in `x-api-key` header for `POST /ingest/batch`
+
+```bash
+# Start backend simulator and stream live telemetry
+pnpm dev:backend
+# In another terminal:
+pnpm --filter @sokil/backend ws:listen
+```
 
 ## Quality gates
 

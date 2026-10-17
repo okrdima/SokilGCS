@@ -14,21 +14,21 @@ export default tseslint.config(
     },
   },
   {
-    // Tests can be looser
-    files: ['test/**/*.ts', 'src/**/*.spec.ts'],
+    // Tests and scripts can be looser
+    files: ['test/**/*.ts', 'src/**/*.spec.ts', 'src/**/*.e2e-spec.ts', 'scripts/**/*.ts'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       'no-console': 'off',
     },
   },
   {
-    // Pure-TS math core: no framework dependencies
-    files: ['src/domain/math/**/*.ts'],
+    // Pure-TS domain core: no framework dependencies
+    files: ['src/domain/**/*.ts'],
     rules: {
       'no-restricted-imports': ['error', {
         patterns: [{
           group: ['@nestjs/*', 'rxjs', 'rxjs/*'],
-          message: 'The math core must stay pure TypeScript without framework dependencies.',
+          message: 'The domain core must stay pure TypeScript without framework dependencies.',
         }],
       }],
     },

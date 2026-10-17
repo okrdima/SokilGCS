@@ -15,10 +15,10 @@ Plan for v0.1.0, assuming roughly 10 to 15 hours per week. Each week ends with s
 
 ## Week 2: Simulator and ingest pipeline
 
-- [ ] Simulated vehicle: a circular track, a draining battery, 10 Hz output as `TelemetryBatch`
-- [ ] Backend ingest service that validates batches at the boundary
-- [ ] WebSocket gateway that broadcasts the latest value per channel
-- [ ] Docker Compose entry for the backend and the database
+- [x] Simulated vehicle: a circular track, a draining battery, 10 Hz output as `TelemetryBatch`
+- [x] Backend ingest service that validates batches at the boundary
+- [x] WebSocket gateway that broadcasts the latest value per channel
+- [x] Docker Compose entry for the backend (standalone container, database not required for simulation)
 
 **Done when:** a browser console or a WebSocket client shows live values.
 

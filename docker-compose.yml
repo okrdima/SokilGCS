@@ -50,17 +50,15 @@ services:
       dockerfile: apps/backend/Dockerfile
     container_name: sokil-backend
     ports:
-      - "3001:3000"
+      - "127.0.0.1:3001:3000"
     environment:
       - NODE_ENV=production
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-sokil}:${POSTGRES_PASSWORD:-sokil_dev_only}@db:5432/${POSTGRES_DB:-sokilgcs}
-    depends_on:
-      redis:
-        condition: service_healthy
-      db:
-        condition: service_healthy
+      - PORT=3000
+      - WEB_ORIGIN=${WEB_ORIGIN:-http://localhost:3000}
+      - SIMULATOR_ENABLED=${SIMULATOR_ENABLED:-true}
+      - SIMULATOR_SEED=${SIMULATOR_SEED:-42}
+      - SIMULATOR_BATTERY_DRAIN_SECONDS=${SIMULATOR_BATTERY_DRAIN_SECONDS:-600}
+      - INGEST_TOKEN=${INGEST_TOKEN:-CHANGE_ME_BEFORE_USE}
 
   # Next.js web interface (full-stack mode only: --profile app)
   gcs-frontend:

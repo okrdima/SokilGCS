@@ -2,11 +2,7 @@
   "extends": "@sokil/config/tsconfig/node.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
-    "paths": {
-      "@sokil/contracts/*": ["../packages/contracts/dist/*"],
-      "@sokil/contracts": ["../packages/contracts/dist/index"]
-    }
+    "rootDir": "./src"
   },
   "include": ["src/**/*"]
 }

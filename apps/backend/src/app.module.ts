@@ -6,10 +6,15 @@ import { APP_PIPE,APP_FILTER } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { ZodExceptionFilter }from './common/pipes'
 
+import { TelemetryModule } from './telemetry/telemetry.module';
+
 @Module({
-  imports: [DroneModule],
+  imports: [DroneModule, TelemetryModule],
   controllers: [AppController],
-  providers: [AppService,{ provide: APP_PIPE, useClass:  ZodValidationPipe},{ provide: APP_FILTER, useClass: ZodExceptionFilter }
-],
+  providers: [
+    AppService,
+    { provide: APP_PIPE, useClass: ZodValidationPipe },
+    { provide: APP_FILTER, useClass: ZodExceptionFilter },
+  ],
 })
 export class AppModule {}
